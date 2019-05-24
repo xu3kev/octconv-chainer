@@ -4,7 +4,7 @@ Implementation of octave convolution in Chainer (https://arxiv.org/abs/1904.0504
 See `chainer-cifar10/` for training with cifar10 dataset. (The resnet model with octave convolution is `chainer-cifar10/models/oct_resnet.py`.)
 Use `train_imagenet_multi.py` for training imagenet. See chainercv imagenet training example for details.
 
-imagenet training for 90 epochs:
+ResNet50 imagenet training for 90 epochs:
 
 | alpha         | validation accuracy | theoretical flop cost|
 | ------------- | ------------------- |----------------------|
