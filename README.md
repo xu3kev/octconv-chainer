@@ -14,9 +14,9 @@ Pretrained models are in the `pretrained_models/` directory
 
 To run the pretrained model for validation:
 ```bash
-$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.25 --pretrained-model=pretrained_models/octresnet50_alpha25 --gpu=0
-$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.50 --pretrained-model=pretrained_models/octresnet50_alpha50 --gpu=0
-$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.75 --pretrained-model=pretrained_models/octresnet50_alpha75 --gpu=0
+$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.25 --pretrained-model=pretrained_models/octresnet50_alpha25.npz --gpu=0
+$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.50 --pretrained-model=pretrained_models/octresnet50_alpha50.npz --gpu=0
+$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.75 --pretrained-model=pretrained_models/octresnet50_alpha75.npz --gpu=0
 ```
 
 The imageNet dataset preparation follows examples in chainercv.
