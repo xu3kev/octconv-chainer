@@ -4,7 +4,6 @@ import chainer.links as L
 from octconv import OctConv
 from octconv import Conv_BN
 from octconv import Conv_BN_ACT
-from octconv import oct_relu
 from octconv import oct_add
 
 

@@ -3,7 +3,7 @@ import chainer.functions as F
 
 from octconv import Conv_BN_ACT
 from octconv import oct_add
-from octconv import oct_relu
+from octconv import oct_function
 from chainercv.links import PickableSequentialChain
 from chainercv.links import SEBlock
 
@@ -131,5 +131,5 @@ class Bottleneck(chainer.Chain):
         else:
             residual = x
         h = oct_add(h, residual)
-        h = oct_relu(h)
+        h = oct_function(F.relu)(h)
         return h

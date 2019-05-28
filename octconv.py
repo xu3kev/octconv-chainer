@@ -10,13 +10,10 @@ def get_num_channel(channels, alpha):
     h_channels = channels - l_channels
     return (h_channels, l_channels)
 
-def oct_relu(x):
-    if type(x) is tuple:
-        return F.relu(x[0]), F.relu(x[1])
-    else:
-        return F.relu(x)
-
 def oct_add(x1, x2):
+    """
+    add tuple
+    """
     if type(x1) is tuple:
         if type(x2) is tuple:
             return (x1[0]+x2[0], x1[1]+x2[1])
@@ -29,12 +26,20 @@ def oct_add(x1, x2):
             return x1+x2
 
 def oct_function(f):
+    """
+    make the function f work on tuple of two variable and also just one varialbe respectively
+    """
     def f2(x):
-        ret = (f(x[0]), f(x[1]))
-        if ret[1] is None:
-            return ret[0]
+        if type(x) is tuple:
+            if x[1] is not None:
+                ret = (f(x[0]), f(x[1]))
+                if ret[1] is None:
+                    ret = ret[0]
+                return ret
+            else:
+                return f(x[0])
         else:
-            return ret
+            return f(x)
     return f2
 
 
@@ -44,6 +49,9 @@ class OctConv(chainer.Chain):
     def __init__(self, in_channels, out_channels, ksize, stride=1, pad=0
                  ,nobias=True, initialW=None, initial_bias=None, dilate=1, groups=1, alpha_in = None, alpha_out = 0.5):
         """Octave Convolution
+        The high frequency and low frequency output are represented as a tuple of two variables (high_freq, low_freq).
+        The forward function accept input type as either Tuple of two variable or Variable.
+        When the forward output has no low frequency part, it will output a Variable instead of Tuple.
 
         Noted that initialW and initial_bias should only accept initializer
         """

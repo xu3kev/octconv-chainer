@@ -13,7 +13,7 @@ from chainer.training import extensions
 
 from chainercv.chainer_experimental.datasets.sliceable import TransformDataset
 from chainercv.datasets import directory_parsing_label_names
-from chainercv.datasets import DirectoryParsingLabelDataset
+from directory_parsing_label_dataset import DirectoryParsingLabelDataset
 from chainercv.transforms import center_crop
 from chainercv.transforms import random_flip
 from chainercv.transforms import random_sized_crop
@@ -112,9 +112,9 @@ def main():
             print('lr={}: lr is selected based on the linear '
                   'scaling rule'.format(lr))
 
-    #label_names = directory_parsing_label_names(args.train)
-    label_names=[1,2,3]
-    print("alpha =", args.alpha)
+    print(comm.rank, 'start parsing label names')
+    label_names = directory_parsing_label_names(args.train)
+    print(comm.rank, 'finish parsing label names')
 
     model_cfg = model_cfgs[args.model]
     extractor = model_cfg['class'](
@@ -130,17 +130,15 @@ def main():
             if l.conv3.bn_l is not None:
                 l.conv3.bn_l.gamma.data[:] = 0
 
-    import numpy as np
-
-    extractor(np.random.normal(0,1,(16,3,224,224)).astype(np.float32))
-    exit()
+    print(comm.rank, 'start dir parsing label')
     train_data = DirectoryParsingLabelDataset(args.train)
     val_data = DirectoryParsingLabelDataset(args.val)
+    print(comm.rank, 'end dir parsing label')
     train_data = TransformDataset(
         train_data, ('img', 'label'), TrainTransform(extractor.mean))
     val_data = TransformDataset(
         val_data, ('img', 'label'), ValTransform(extractor.mean))
-    print('finished loading dataset')
+    print(comm.rank, 'finished loading dataset')
 
     if comm.rank == 0:
         train_indices = np.arange(len(train_data))
