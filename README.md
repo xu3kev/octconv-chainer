@@ -7,13 +7,16 @@ ResNet50 ImageNet training for 90 epochs:
 | ------------- | ------------------- |----------------------|
 | 0 (origin)    | 0.762               |    100%              |
 | 0.25          | 0.762               |    67%               |
-| 0.5           | 0.757               |    44%               |
+| 0.50          | 0.757               |    44%               |
+| 0.75          | 0.749               |    30%               |
 
 Pretrained models are in the `pretrained_models` directory
 
 To run the pretrained model for validation:
 ```bash
 $ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.25 --pretrained-model=pretrained_models/octresnet50_alpha25 --gpu=0
+$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.50 --pretrained-model=pretrained_models/octresnet50_alpha50 --gpu=0
+$ python eval_imagenet.py <ImageNet validation directory> --model=octresnet50 --alpha=0.75 --pretrained-model=pretrained_models/octresnet50_alpha75 --gpu=0
 ```
 
 The imageNet dataset preparation follows examples in chainercv.
