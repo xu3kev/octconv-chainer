@@ -22,9 +22,9 @@ _imagenet_mean = np.array(
     dtype=np.float32)[:, np.newaxis, np.newaxis]
 
 
-class ResNet(PickableSequentialChain):
+class OctResNet(PickableSequentialChain):
 
-    """Base class for ResNet architecture.
+    """Base class for OctResNet architecture.
 
     This is a pickable sequential link.
     The network can choose output layers from set of all
@@ -109,8 +109,6 @@ class ResNet(PickableSequentialChain):
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet50_imagenet_trained_2018_11_26.npz',
                     'cv2': True,
                 },
             },
@@ -118,8 +116,6 @@ class ResNet(PickableSequentialChain):
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet101_imagenet_trained_2018_11_26.npz',
                     'cv2': True,
                 },
             },
@@ -127,8 +123,6 @@ class ResNet(PickableSequentialChain):
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet152_imagenet_trained_2018_11_26.npz',
                     'cv2': True,
                 },
             },
@@ -138,24 +132,18 @@ class ResNet(PickableSequentialChain):
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet50_imagenet_converted_2018_03_07.npz'
                 },
             },
             101: {
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet101_imagenet_converted_2018_03_07.npz'
                 },
             },
             152: {
                 'imagenet': {
                     'param': {'n_class': 1000, 'mean': _imagenet_mean},
                     'overwritable': {'mean'},
-                    'url': 'https://chainercv-models.preferred.jp/'
-                    'resnet152_imagenet_converted_2018_03_07.npz'
                 },
             }
         }
@@ -193,7 +181,7 @@ class ResNet(PickableSequentialChain):
             fc_kwargs['initialW'] = initializers.constant.Zero()
         kwargs = {'initialW': initialW, 'stride_first': stride_first}
 
-        super(ResNet, self).__init__()
+        super(OctResNet, self).__init__()
         with self.init_scope():
             self.conv1 = Conv_BN_ACT(None, 64, 7, 2, 3, nobias=conv1_no_bias,
                                        initialW=initialW, alpha_out=alpha)
@@ -210,11 +198,11 @@ class ResNet(PickableSequentialChain):
             chainer.serializers.load_npz(path, self)
 
 
-class ResNet50(ResNet):
+class OctResNet50(OctResNet):
 
-    """ResNet-50 Network.
+    """OctResNet-50 Network.
 
-    Please consult the documentation for :class:`ResNet`.
+    Please consult the documentation for :class:`OctResNet`.
 
     .. seealso::
         :class:`chainercv.links.model.resnet.ResNet`
@@ -223,16 +211,16 @@ class ResNet50(ResNet):
 
     def __init__(self, n_class=None, pretrained_model=None,
                  mean=None, initialW=None, fc_kwargs={}, arch='fb', alpha=0):
-        super(ResNet50, self).__init__(
+        super(OctResNet50, self).__init__(
             50, n_class, pretrained_model,
             mean, initialW, fc_kwargs, arch, alpha)
 
 
-class ResNet101(ResNet):
+class OctResNet101(OctResNet):
 
-    """ResNet-101 Network.
+    """OctResNet-101 Network.
 
-    Please consult the documentation for :class:`ResNet`.
+    Please consult the documentation for :class:`OctResNet`.
 
     .. seealso::
         :class:`chainercv.links.model.resnet.ResNet`
@@ -241,16 +229,16 @@ class ResNet101(ResNet):
 
     def __init__(self, n_class=None, pretrained_model=None,
                  mean=None, initialW=None, fc_kwargs={}, arch='fb', alpha=0):
-        super(ResNet101, self).__init__(
+        super(OctResNet101, self).__init__(
             101, n_class, pretrained_model,
             mean, initialW, fc_kwargs, arch, alpha=alpha)
 
 
-class ResNet152(ResNet):
+class OctResNet152(OctResNet):
 
-    """ResNet-152 Network.
+    """OctResNet-152 Network.
 
-    Please consult the documentation for :class:`ResNet`.
+    Please consult the documentation for :class:`OctResNet`.
 
     .. seealso::
         :class:`chainercv.links.model.resnet.ResNet`
@@ -259,6 +247,6 @@ class ResNet152(ResNet):
 
     def __init__(self, n_class=None, pretrained_model=None,
                  mean=None, initialW=None, fc_kwargs={}, arch='fb', alpha=0):
-        super(ResNet152, self).__init__(
+        super(OctResNet152, self).__init__(
             152, n_class, pretrained_model,
             mean, initialW, fc_kwargs, arch, alpha=alpha)

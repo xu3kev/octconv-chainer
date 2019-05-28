@@ -21,7 +21,7 @@ from chainercv.links import VGG16
 
 from chainercv.utils import apply_to_iterator
 from chainercv.utils import ProgressHook
-from resnet import ResNet50 as OctResNet50
+from resnet import OctResNet50
 
 
 models = {

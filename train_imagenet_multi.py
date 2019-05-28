@@ -23,9 +23,9 @@ from chainercv.transforms import scale
 from chainercv.chainer_experimental.training.extensions import make_shift
 
 from resblock import Bottleneck
-from resnet import ResNet101
-from resnet import ResNet152
-from resnet import ResNet50
+from resnet import OctResNet101
+from resnet import OctResNet152
+from resnet import OctResNet50
 
 import chainermn
 
@@ -66,11 +66,11 @@ class ValTransform(object):
 
 def main():
     model_cfgs = {
-        'resnet50': {'class': ResNet50, 'score_layer_name': 'fc6',
+        'resnet50': {'class': OctResNet50, 'score_layer_name': 'fc6',
                      'kwargs': {'arch': 'fb'}},
-        'resnet101': {'class': ResNet101, 'score_layer_name': 'fc6',
+        'resnet101': {'class': OctResNet101, 'score_layer_name': 'fc6',
                       'kwargs': {'arch': 'fb'}},
-        'resnet152': {'class': ResNet152, 'score_layer_name': 'fc6',
+        'resnet152': {'class': OctResNet152, 'score_layer_name': 'fc6',
                       'kwargs': {'arch': 'fb'}}
     }
     parser = argparse.ArgumentParser(
